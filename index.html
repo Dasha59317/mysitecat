@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Породы кошек</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #f9f3e9 0%, #e8d9c5 100%);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.3);
+        }
+
+        h1 {
+            font-size: 48px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin: 0;
+            font-weight: 800;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .intro h2 {
+            color: #ff6b6b;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .intro p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #666;
+        }
+
+        .breeds {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .breed {
+            display: flex;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .breed:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .img-container {
+            width: 400px;
+            height: 300px;
+            flex-shrink: 0;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .breed:hover .img-container img {
+            transform: scale(1.05);
+        }
+
+        .breed-info {
+            flex: 1;
+            padding: 30px;
+            background: linear-gradient(to right, white 0%, #fff9f4 100%);
+        }
+
+        .breed-info h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 28px;
+            border-bottom: 3px solid #ffd6d6;
+            padding-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: #fff0f0;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .breed-info p {
+            color: #555;
+            font-size: 16px;
+        }
+
+        .traits {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .trait {
+            background: #e8f4ff;
+            color: #4a90e2;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);
+        }
+
+        .footer h3 {
+            margin: 0 0 20px 0;
+            font-size: 24px;
+        }
+
+        .footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .footer a:hover {
+            background: rgba(255,255,255,0.3);
+            text-decoration: none;
+        }
+
+        .cat-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 768px) {
+            .breed {
+                flex-direction: column;
+            }
+            
+            .img-container {
+                width: 100%;
+                height: 250px;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            .intro h2 {
+                font-size: 24px;
+            }
+            
+            .breed-info h3 {
+                font-size: 24px;
+            }
+            
+            .stats, .traits {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main {
+                padding: 10px;
+            }
+            
+            .header, .intro {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <!-- Шапка сайта -->
+        <header class="header">
+            <h1>Мир кошачьих пород</h1>
+            <p style="font-size: 20px; margin-top: 10px;">Самые популярные породы кошек</p>
+        </header>
+
+        <!-- Введение -->
+        <section class="intro">
+            <h2>О кошках и их породах</h2>
+            <p>Кошки — удивительные создания, которые уже более 10 000 лет живут рядом с человеком. 
+            Каждая порода имеет свои уникальные особенности характера, внешности и ухода. 
+            В мире насчитывается более 70 официально признанных пород кошек, и каждая из них 
+            по-своему прекрасна и уникальна. От пушистых гигантов до миниатюрных красавиц — 
+            здесь вы узнаете о самых популярных породах наших мурлыкающих друзей.</p>
+        </section>
+
+        <!-- Раздел с породами кошек -->
+        <section class="breeds">
+            <h2 style="text-align: center; color: #ff6b6b; margin-bottom: 30px; font-size: 36px;">Популярные породы кошек</h2>
+            
+            <!-- Мейн-кун -->
+            <article class="breed">
+                <div class="img-container">
+                    <img src="img/мейн кун.jpg" alt="Мейн-кун">
+                </div>
+                <div class="breed-info">
+                    <h3>Мейн-кун</h3>
+                    <div class="stats">
+                        <span class="stat">Происхождение: США</span>
+                        <span class="stat">Вес: 4-8 кг</span>
+                        <span class="stat">Длина: до 1 метра</span>
+                    </div>
+                    <p>Мейн-куны — одна из самых крупных пород домашних кошек. 
+                    Известны своим дружелюбным характером, высоким интеллектом и 
+                    роскошной пушистой шерстью. Отличные компаньоны, хорошо ладят с детьми 
+                    и другими животными. Их часто называют "нежными гигантами".</p>
+                    <div class="traits">
+                        <span class="trait">Дружелюбный</span>
+                        <span class="trait">Умный</span>
+                        <span class="trait">Игривый</span>
+                        <span class="trait">Общительный</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Британская короткошёрстная -->
+            <article class="breed">
+                <div class="img-container">
+                    <img src="img/британская короткошерстная.jpg" alt="Британская короткошёрстная кошка">
+                </div>
+                <div class="breed-info">
+                    <h3>Британская короткошёрстная</h3>
+                    <div class="stats">
+                        <span class="stat">Происхождение: Великобритания</span>
+                        <span class="stat">Вес: 4-8 кг</span>
+                        <span class="stat">Продолжительность жизни: 12-20 лет</span>
+                    </div>
+                    <p>Классическая порода с плюшевой шерстью и округлыми формами. 
+                    Британцы отличаются спокойным, независимым характером и королевской 
+                    невозмутимостью. Их часто называют "чеширскими котами" из-за 
+                    характерной улыбки.</p>
+                    <div class="traits">
+                        <span class="trait">Спокойный</span>
+                        <span class="trait">Независимый</span>
+                        <span class="trait">Уравновешенный</span>
+                        <span class="trait">Преданный</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Сиамская -->
+            <article class="breed">
+                <div class="img-container">
+                    <img src="img/сиамская.jpg" alt="Сиамская кошка">
+                </div>
+                <div class="breed-info">
+                    <h3>Сиамская</h3>
+                    <div class="stats">
+                        <span class="stat">Происхождение: Таиланд</span>
+                        <span class="stat">Вес: 3-5 кг</span>
+                        <span class="stat">Окрас: колор-пойнт</span>
+                    </div>
+                    <p>Одна из самых узнаваемых пород с ярко-голубыми глазами и 
+                    контрастным окрасом. Сиамские кошки очень общительны, разговорчивы 
+                    и привязчивы к хозяину. Обладают высоким интеллектом и энергичным 
+                    характером.</p>
+                    <div class="traits">
+                        <span class="trait">Общительный</span>
+                        <span class="trait">Энергичный</span>
+                        <span class="trait">Говорливый</span>
+                        <span class="trait">Преданный</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Сфинкс -->
+            <article class="breed">
+                <div class="img-container">
+                    <img src="img/канадский сфинкс.jpg" alt="Канадский сфинкс">
+                </div>
+                <div class="breed-info">
+                    <h3>Канадский сфинкс</h3>
+                    <div class="stats">
+                        <span class="stat">Происхождение: Канада</span>
+                        <span class="stat">Вес: 3.5-6 кг</span>
+                        <span class="stat">Температура тела: 38-39°C</span>
+                    </div>
+                    <p>Уникальная бесшёрстная порода с необычной внешностью и тёплой 
+                    кожей. Сфинксы очень ласковы, общительны и нуждаются в постоянном 
+                    внимании хозяина. Из-за отсутствия шерсти требуют особого ухода 
+                    и защиты от солнца и холода.</p>
+                    <div class="traits">
+                        <span class="trait">Ласковый</span>
+                        <span class="trait">Общительный</span>
+                        <span class="trait">Энергичный</span>
+                        <span class="trait">Теплолюбивый</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Шотландская вислоухая -->
+            <article class="breed">
+                <div class="img-container">
+                    <img src="img/шотландская вислоухая.jpg" alt="Шотландская вислоухая кошка">
+                </div>
+                <div class="breed-info">
+                    <h3>Шотландская вислоухая</h3>
+                    <div class="stats">
+                        <span class="stat">Происхождение: Шотландия</span>
+                        <span class="stat">Вес: 3-6 кг</span>
+                        <span class="stat">Уши: загнутые вперёд</span>
+                    </div>
+                    <p>Порода с уникальными загнутыми вперёд ушками, придающими 
+                    кошке "совиный" вид. Обладают спокойным, уравновешенным характером, 
+                    хорошо адаптируются к разным условиям. Любят сидеть в позе "суриката" — 
+                    на задних лапах.</p>
+                    <div class="traits">
+                        <span class="trait">Спокойный</span>
+                        <span class="trait">Дружелюбный</span>
+                        <span class="trait">Адаптивный</span>
+                        <span class="trait">Игривый</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Подвал сайта -->
+        <footer class="footer">
+            <h3>Любите кошек — и они ответят вам взаимностью!</h3>
+            <p><a href="https://t.me/dariaminovshikova">Связаться с автором сайта</a></p>
+        </footer>
+    </div>
+</body>
+</html>
